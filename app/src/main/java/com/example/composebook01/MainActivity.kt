@@ -9,6 +9,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -19,10 +20,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.composebook01.ui.CircularProgressBar
-import com.example.composebook01.ui.MusicKnob
-import com.example.composebook01.ui.Timer
-import com.example.composebook01.ui.VolumeBar
+import com.example.composebook01.ui.*
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.tan
@@ -32,15 +30,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(
-                modifier = Modifier.fillMaxSize(), color = Color(0xFF101010)
+                color = Color(0xFF101010),
+                modifier = Modifier.fillMaxSize()
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Timer(
-                        totalTime = 100L * 1000L,
-                        handleColor = Color.Green,
-                        inactiveColor = Color.DarkGray,
-                        activeColor = Color(0xFF37B900),
-                        modifier = Modifier.size(200.dp)
+                DropDown(
+                    text = "Hello world!",
+                    modifier = Modifier.padding(15.dp)
+                ) {
+                    Text(
+                        text = "This is now revealed!",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp)
+                            .background(Color.Green)
                     )
                 }
             }
