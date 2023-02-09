@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize()
             ) {
 //                Navigation()
-                MultiLayerGraphScreenDemo()
+//                MultiLayerGraphScreenDemo()
+                PermissionDemo()
             }
         }
     }
