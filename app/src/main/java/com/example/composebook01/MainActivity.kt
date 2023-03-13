@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -31,6 +35,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -43,13 +48,34 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(
-//                color = Color(0xFF101010),
-                modifier = Modifier.fillMaxSize()
+//            Surface(
+////                color = Color(0xFF101010),
+//                modifier = Modifier.fillMaxSize()
+//            ) {
+////                Navigation()
+////                MultiLayerGraphScreenDemo()
+//                PermissionDemo()
+//            }
+            val viewModel by viewModels<MainViewModel>()
+            val flowColor by viewModel.color.collectAsState()
+            val composeColor = viewModel.composeColor
+            Column(
+                modifier = Modifier.clickable {
+                    viewModel.generateNewColor()
+                }
             ) {
-//                Navigation()
-//                MultiLayerGraphScreenDemo()
-                PermissionDemo()
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(Color(flowColor))
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(Color(composeColor))
+                )
             }
         }
     }
